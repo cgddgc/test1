@@ -166,7 +166,6 @@ class cloud_music{
 			$artist=$arr['result']['songs'][0]['artists'][0]['name'];
 		}
 		else $artist=$art;
-		//echo $src1;
 		return $artist;
 	}
 }
