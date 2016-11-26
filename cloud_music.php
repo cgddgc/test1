@@ -1,6 +1,6 @@
 <?php
 class cloud_music{
-	public function curl_get($url)
+	function curl_get($url)
 	{
 		$refer = "http://music.163.com/";
 		$header[] = "Cookie: " . "appver=1.5.0.75771;";
@@ -15,7 +15,7 @@ class cloud_music{
 		return $output;
 	}
 
-	public function music_search($word, $type)
+	function music_search($word, $type)
 	{
 		$url = "http://music.163.com/api/search/pc";
 		$post_data = array(
@@ -60,43 +60,43 @@ class cloud_music{
 		return $result;
 	}
 
-	public function get_music_info($music_id)
+	function get_music_info($music_id)
 	{
 		$url = "http://music.163.com/api/song/detail/?id=" . $music_id . "&ids=%5B" . $music_id . "%5D";
 		return curl_get($url);
 	}
 
-	public function get_artist_album($artist_id, $limit)
+	function get_artist_album($artist_id, $limit)
 	{
 		$url = "http://music.163.com/api/artist/albums/" . $artist_id . "?limit=" . $limit;
 		return curl_get($url);
 	}
 
-	public function get_album_info($album_id)
+	function get_album_info($album_id)
 	{
 		$url = "http://music.163.com/api/album/" . $album_id;
 		return curl_get($url);
 	}
 
-	public function get_playlist_info($playlist_id)
+	function get_playlist_info($playlist_id)
 	{
 		$url = "http://music.163.com/api/playlist/detail?id=" . $playlist_id;
 		return curl_get($url);
 	}
 
-	public function get_music_lyric($music_id)
+	function get_music_lyric($music_id)
 	{
 		$url = "http://music.163.com/api/song/lyric?os=pc&id=" . $music_id . "&lv=-1&kv=-1&tv=-1";
 		return curl_get($url);
 	}
 
-	public function get_mv_info()
+	function get_mv_info()
 	{
 		$url = "http://music.163.com/api/mv/detail?id=319104&type=mp4";
 		return curl_get($url);
 	}
 
-	public function get_search($word,$limit){
+	function get_search($word,$limit){
 		$url = "http://music.163.com/api/search/get/web?csrf_token=";
 		$curl = curl_init();
 		$post_data = 'hlpretag=&hlposttag=&s='. $word . '&type=1&offset=0&total=true&limit=' . $limit;
@@ -128,7 +128,7 @@ class cloud_music{
 	#echo get_mv_info();
 	//echo get_search("pdd洪荒之力",1);
 	//$output=get_search("普通diso",1);
-	public function get_musicid($word,$limit,$art){
+	function get_musicid($word,$limit,$art){
 		$src=get_search($word,$limit);
 		$arr=json_decode($src,true);
 		$music_id=$arr['result']['songs'][0]['id'];
@@ -150,7 +150,7 @@ class cloud_music{
 		}
 		return $music_id;
 	}
-	public function get_musicUrl($word,$limit,$art){
+	function get_musicUrl($word,$limit,$art){
 		$musicUrl="null";
 		$music_id=get_musicid($word,$limit,$art);
 		$music_info=get_music_info($music_id);
@@ -159,7 +159,7 @@ class cloud_music{
 		$musicUrl=$music_info['songs'][0]['mp3Url'];
 		return $musicUrl;
 	}
-	public function get_artist($word,$limit,$art){
+	function get_artist($word,$limit,$art){
 		$src=get_search($word,$limit);
 		$arr=json_decode($src,true);
 		if($art==""){
